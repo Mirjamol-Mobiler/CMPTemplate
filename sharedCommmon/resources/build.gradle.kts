@@ -1,13 +1,10 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.project.base)
+    alias(libs.plugins.project.kmp)
+    alias(libs.plugins.project.compose)
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-    }
-}
+//compose.resources {
+//    publicResClass = true
+//    packageOfResClass = "uz.cdti.supply.resources"
+//    generateResClass = always
+//}

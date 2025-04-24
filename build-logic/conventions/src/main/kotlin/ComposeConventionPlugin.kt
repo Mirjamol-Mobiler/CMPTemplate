@@ -11,8 +11,8 @@ class ComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target){
             with(pluginManager) {
-                apply(libs.getPluginId("jetbrainsCompose"))
-                apply(libs.getPluginId("compose.compiler"))
+                apply(libs.getPluginId("composeCompiler"))
+                apply(libs.getPluginId("composeMultiplatform"))
                 apply(libs.getPluginId("kotlinMultiplatform"))
             }
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
