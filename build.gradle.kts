@@ -32,6 +32,70 @@ subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
 }
 
+tasks.register("createBaseFeatureModule") {
+    group = "feature"
+    description = "This helps to create base new feature module with api and impl"
+
+    fun createBaseFeatureModule(
+        dir: File,
+        buildContent: String,
+        packageName: String,
+        moduleName: String
+    ) {
+        dir.apply {
+            mkdirs()
+            file("$this/build.gradle.kts").writeText(buildContent)
+            file("$this/src/commonMain/kotlin/$packageName/$moduleName").mkdirs()
+        }
+    }
+
+    doLast {
+        val featureName = project.properties["featureName"]?.toString()
+            ?: GradleException("Please specify feature name using PfeatureName=featureName")
+        val packageName = project.properties["packageName"]?.toString() ?: libs.versions.packageName
+        val basePath = "sharedFeature/$featureName"
+
+        val apiBuildContent = "plugins {\n    alias(libs.plugins.project.feature.api)\n}"
+        val implBuildContent = """
+            plugins {
+                alias(libs.plugins.project.feature.impl)
+            }
+
+            kotlin {
+                sourceSets {
+                    commonMain {
+                        dependencies {
+                            implementation(projects.sharedFeature.$featureName.api)
+                        }
+                    }
+                }
+            }
+        """.trimIndent()
+        createBaseFeatureModule(
+            file("$basePath/api"),
+            apiBuildContent,
+            packageName.toString(),
+            "$featureName/impl"
+        )
+        createBaseFeatureModule(
+            file("$basePath/impl"),
+            implBuildContent,
+            packageName.toString(),
+            "$featureName/impl"
+        )
+
+        val settingsFile = file("settings.gradle.kts")
+        val includeLines = """
+            include("sharedFeature:$featureName:api")
+            include("sharedFeature:$featureName:impl")
+        """.trimIndent()
+        if (!settingsFile.readText().contains(":$featureName.api")) {
+            settingsFile.appendText("\n$includeLines")
+        }
+        println("$featureName module created successfully at $packageName")
+    }
+}
+
 tasks.register("createFeatureModule") {
     group = "feature"
     description = "This helps to create new feature module with api and impl"
