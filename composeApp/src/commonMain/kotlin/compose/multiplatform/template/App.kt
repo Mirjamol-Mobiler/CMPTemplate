@@ -8,6 +8,7 @@ import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.transitions.FadeTransition
 import compose.multiplatform.template.splash.impl.screens.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
 
 @OptIn(ExperimentalVoyagerApi::class)
 @Composable

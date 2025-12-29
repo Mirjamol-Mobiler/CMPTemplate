@@ -32,6 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -51,6 +52,10 @@ kotlin {
             //Shared modules
             implementation(projects.sharedCommon.navigation)
             implementation(projects.sharedCommon.resources)
+
+            //Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
         }
     }
 }
@@ -76,6 +81,7 @@ android {
             isMinifyEnabled = false
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
