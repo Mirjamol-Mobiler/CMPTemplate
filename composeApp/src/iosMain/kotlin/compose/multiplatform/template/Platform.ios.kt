@@ -1,4 +1,4 @@
-package compose.multiplatform.project
+package compose.multiplatform.template
 
 import platform.UIKit.UIDevice
 

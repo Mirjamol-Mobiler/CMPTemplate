@@ -1,27 +1,27 @@
 [versions]
-agp = "8.6.1"
-android-compileSdk = "35"
-android-minSdk = "24"
-android-targetSdk = "35"
+agp = "8.11.1"
+android-compileSdk = "36"
+android-minSdk = "26"
+android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.2.1"
 androidx-core-ktx = "1.15.0"
 androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
-androidx-material = "1.12.0"
+androidx-material = "1.13.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.3"
 junit = "4.13.2"
-kotlin = "2.0.0"
-jetbrainsKotlinJvm = "1.9.24"
+kotlin = "2.2.21"
+jetbrainsKotlinJvm = "2.2.21"
 detekt = "1.23.7"
 compose-plugin = "1.7.1"
 koin = "4.0.0"
-ksp = "2.1.20-1.0.31"
+ksp = "2.2.21-2.0.4"
 ktor = "3.0.1"
 settings = "1.1.1"
-packageName = "jamol.mobiler"
+packageName = "compose.multiplatform.template"
 coil = "3.1.0"
 voyager = "1.1.0-beta03"
 
@@ -100,6 +100,7 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-mu
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 

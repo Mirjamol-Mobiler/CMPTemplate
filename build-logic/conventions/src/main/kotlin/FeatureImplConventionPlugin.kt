@@ -21,6 +21,11 @@ class FeatureImplConventionPlugin : Plugin<Project> {
                     commonMain.dependencies {
                         implementation(findLibrary("koin.core"))
                         implementation(findLibrary("kotlin.collections.immutable"))
+                        implementation(project(":sharedCommon:navigation"))
+                        implementation(project(":sharedCommon:resources"))
+                    }
+                    androidMain.dependencies {
+                        implementation(findLibrary("koin.android"))
                     }
                 }
             }

@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -43,16 +42,25 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.voyager.transitions)
+
+            //Feature modules
+            implementation(projects.sharedFeature.splash.api)
+            implementation(projects.sharedFeature.splash.impl)
+
+            //Shared modules
+            implementation(projects.sharedCommon.navigation)
+            implementation(projects.sharedCommon.resources)
         }
     }
 }
 
 android {
-    namespace = "compose.multiplatform.project"
+    namespace = "compose.multiplatform.template"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "compose.multiplatform.project"
+        applicationId = "compose.multiplatform.template"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

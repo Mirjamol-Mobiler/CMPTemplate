@@ -1,16 +1,14 @@
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
-    with(libs.plugins) {
-        alias(androidApplication) apply false
-        alias(androidLibrary) apply false
-        alias(composeCompiler) apply false
-        alias(composeMultiplatform) apply false
-        alias(kotlinMultiplatform) apply false
-        alias(jetbrainsKotlinJvm) apply false
-        id(detekt.get().pluginId) version libs.versions.detekt
-        id(ksp.get().pluginId) version libs.versions.ksp
-    }
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.composeCompiler) apply false
+    alias(libs.plugins.composeMultiplatform) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.jetbrainsKotlinJvm) apply false
+    id(libs.plugins.detekt.get().pluginId) version libs.versions.detekt
+    id(libs.plugins.ksp.get().pluginId) version libs.versions.ksp
 }
 
 buildscript {
@@ -98,26 +96,32 @@ tasks.register("createBaseFeatureModule") {
 
 tasks.register("createFeatureModule") {
     group = "feature"
-    description = "This helps to create new feature module with api and impl"
+    description = "Create feature module with api and impl"
 
-    fun createModule(dir: File, buildContent: String, packagePath: String, moduleType: String) {
-        dir.apply {
-            mkdirs()
-            file("$this/build.gradle.kts").writeText(buildContent)
-            file("$this/src/main/commonMain/kotlin/$packagePath/$moduleType").mkdirs()
-        }
+    fun createModule(
+        dir: File,
+        buildContent: String,
+        packagePath: String,
+        moduleType: String
+    ) {
+        dir.mkdirs()
+        dir.resolve("build.gradle.kts").writeText(buildContent)
+        dir.resolve("src/commonMain/kotlin/$packagePath/$moduleType").mkdirs()
     }
 
     doLast {
-        val featureName = project.properties["featureName"]?.toString()
-            ?: GradleException("Please specify feature name using PfeatureName=featureName")
-        val moduleName = project.properties["moduleName"]?.toString()
-            ?: GradleException("Please specify feature name using PfeatureName=featureName")
-        val basePackage = project.properties["basePackage"]?.toString() ?: libs.versions.packageName
+        val featureName = project.findProperty("featureName")?.toString() ?: error("Use -PfeatureName=featureName")
+        val basePackage = project.findProperty("basePackage")?.toString() ?: libs.versions.packageName.get()
 
-        val basePath = "sharedFeature/$moduleName/$featureName"
-        val packagePath = "$basePackage/$moduleName/$featureName"
-        val apiBuildContent = "plugins {\n    alias(libs.plugins.project.feature.api)\n}"
+        val basePath = "sharedFeature/$featureName"
+        val packagePath = basePackage.replace(".", "/") + "/$featureName"
+
+        val apiBuildContent = """
+            plugins {
+                alias(libs.plugins.project.feature.api)
+            }
+        """.trimIndent()
+
         val implBuildContent = """
             plugins {
                 alias(libs.plugins.project.feature.impl)
@@ -127,24 +131,29 @@ tasks.register("createFeatureModule") {
                 sourceSets {
                     commonMain {
                         dependencies {
-                            implementation(projects.sharedFeature.$moduleName.$featureName.api)
-                            implementation(libs.voyager.tabNavigator)
+                            implementation(projects.sharedFeature.$featureName.api)
                         }
                     }
                 }
             }
         """.trimIndent()
+
         createModule(file("$basePath/api"), apiBuildContent, packagePath, "api")
         createModule(file("$basePath/impl"), implBuildContent, packagePath, "impl")
 
         val settingsFile = file("settings.gradle.kts")
-        val includeLines = """
-            include(":sharedFeature:$moduleName:$featureName:api")
-            include(":sharedFeature:$moduleName:$featureName:impl")
+        val includeBlock = """
+            
+            include(":sharedFeature:$featureName:api")
+            include(":sharedFeature:$featureName:impl")
         """.trimIndent()
-        if (!settingsFile.readText().contains(":sharedFeature:$moduleName:$featureName.api")) {
-            settingsFile.appendText("\n$includeLines")
+
+        if (!settingsFile.readText()
+                .contains(":sharedFeature:$featureName:api")
+        ) {
+            settingsFile.appendText(includeBlock)
         }
-        println("$featureName module created successfully at $basePath")
+
+        println("Feature '$featureName' created in $basePath")
     }
 }

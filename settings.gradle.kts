@@ -32,9 +32,11 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 
-include(":sharedCommmon")
-include(":sharedCommmon:resources")
+include(":sharedCommon")
+include(":sharedCommon:navigation")
 
 include(":sharedFeature")
-include(":sharedFeature:parentModule")
-include(":sharedFeature:parentModule:test1")
+
+include(":sharedFeature:splash:api")
+include(":sharedFeature:splash:impl")
+include(":sharedCommon:resources")
