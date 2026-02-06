@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 internal fun Project.configureKMPTargets(extensions: KotlinMultiplatformExtension) =
     with(extensions) {
         compilerOptions {
-            apiVersion.set(KotlinVersion.KOTLIN_2_1)
+            apiVersion.set(KotlinVersion.KOTLIN_2_3)
             freeCompilerArgs.addAll(
                 listOf(
                     "-Xexpect-actual-classes",
