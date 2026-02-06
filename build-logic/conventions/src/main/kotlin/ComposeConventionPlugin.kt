@@ -14,6 +14,7 @@ class ComposeConventionPlugin : Plugin<Project> {
                 apply(libs.getPluginId("composeCompiler"))
                 apply(libs.getPluginId("composeMultiplatform"))
                 apply(libs.getPluginId("kotlinMultiplatform"))
+                apply(libs.getPluginId("composeCompiler"))
             }
             val extension = extensions.getByType<KotlinMultiplatformExtension>()
             with(extensions.getByType<ComposeCompilerGradlePluginExtension>()) {

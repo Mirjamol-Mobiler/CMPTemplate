@@ -10,7 +10,6 @@ class FeatureApiConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.getPluginId("project.base"))
                 apply(libs.getPluginId("project.kmp"))
             }
             val kmpExtension = extensions.getByType<KotlinMultiplatformExtension>()

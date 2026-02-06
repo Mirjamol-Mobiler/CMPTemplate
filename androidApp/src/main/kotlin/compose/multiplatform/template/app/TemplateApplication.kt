@@ -16,5 +16,4 @@ class TemplateApplication : Application() {
             modules(appModules())
         }
     }
-
 }

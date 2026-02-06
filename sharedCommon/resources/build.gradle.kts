@@ -1,14 +1,14 @@
 plugins {
-    alias(libs.plugins.project.base)
     alias(libs.plugins.project.kmp)
     alias(libs.plugins.project.compose)
-    id(libs.plugins.kotlin.serialization.get().pluginId) version libs.versions.kotlin
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.components.resources)
+            implementation(libs.components.resources)
+            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
         }
     }

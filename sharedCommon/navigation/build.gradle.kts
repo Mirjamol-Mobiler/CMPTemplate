@@ -1,5 +1,4 @@
 plugins {
-    alias(libs.plugins.project.base)
     alias(libs.plugins.project.kmp)
     alias(libs.plugins.project.compose)
 }

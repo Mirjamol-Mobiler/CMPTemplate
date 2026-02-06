@@ -30,13 +30,13 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":androidApp")
 
+include(":composeApp")
 include(":sharedCommon")
 include(":sharedCommon:navigation")
+include(":sharedCommon:resources")
 
 include(":sharedFeature")
-
 include(":sharedFeature:splash:api")
 include(":sharedFeature:splash:impl")
-include(":sharedCommon:resources")

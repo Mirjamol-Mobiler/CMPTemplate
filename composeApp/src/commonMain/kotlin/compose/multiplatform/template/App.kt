@@ -1,14 +1,13 @@
 package compose.multiplatform.template
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.transitions.FadeTransition
 import compose.multiplatform.template.splash.impl.screens.SplashScreen
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinContext
 
 @OptIn(ExperimentalVoyagerApi::class)
 @Composable

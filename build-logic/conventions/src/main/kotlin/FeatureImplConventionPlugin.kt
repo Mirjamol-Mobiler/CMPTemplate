@@ -11,7 +11,6 @@ class FeatureImplConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply(libs.getPluginId("project.base"))
                 apply(libs.getPluginId("project.compose"))
                 apply(libs.getPluginId("project.kmp"))
             }
@@ -19,6 +18,7 @@ class FeatureImplConventionPlugin : Plugin<Project> {
             with(kmpExtension) {
                 sourceSets {
                     commonMain.dependencies {
+                        implementation(project.dependencies.platform(findLibrary("koin.bom")))
                         implementation(findLibrary("koin.core"))
                         implementation(findLibrary("kotlin.collections.immutable"))
                         implementation(project(":sharedCommon:navigation"))

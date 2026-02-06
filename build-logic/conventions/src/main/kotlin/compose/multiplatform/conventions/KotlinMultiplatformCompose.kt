@@ -13,16 +13,14 @@ internal fun Project.configureCompose(extension: KotlinMultiplatformExtension) {
 
     with(extension) {
         sourceSets {
-            androidMain.dependencies {
-                implementation(findLibrary("androidx.activity.compose"))
-            }
             commonMain.dependencies {
-                implementation(composeDependencies.material)
-                implementation(composeDependencies.material3)
-                implementation(composeDependencies.runtime)
-                implementation(composeDependencies.foundation)
-                implementation(composeDependencies.ui)
-                implementation(composeDependencies.components.resources)
+                implementation(findLibrary("jetbrains.compose.material"))
+                implementation(findLibrary("jetbrains.compose.material3"))
+                implementation(findLibrary("jetbrains.compose.runtime"))
+                implementation(findLibrary("jetbrains.compose.foundation"))
+                implementation(findLibrary("jetbrains.compose.ui"))
+                implementation(findLibrary("jetbrains.compose.ui.tooling.preview"))
+                implementation(findLibrary("components.resources"))
             }
         }
         extensionCompose.configure<ResourcesExtension> {

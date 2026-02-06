@@ -26,11 +26,6 @@ gradlePlugin {
             implementationClass = "KmpConventionPlugin"
         }
 
-        register("baseAndroid") {
-            id = "project.base"
-            implementationClass = "BaseAndroidLibraryConventionPlugin"
-        }
-
         register("featureImpl") {
             id = "project.feature.impl"
             implementationClass = "FeatureImplConventionPlugin"

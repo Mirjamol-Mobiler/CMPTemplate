@@ -10,6 +10,7 @@ class KmpConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+                apply(libs.getPluginId("androidKmpLibrary"))
                 apply(libs.getPluginId("kotlinMultiplatform"))
             }
             val kmpExtension = extensions.getByType<KotlinMultiplatformExtension>()

@@ -1,6 +1,6 @@
 package compose.multiplatform.conventions
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
@@ -13,7 +13,7 @@ internal fun Project.configureBaseAndroid(extension: LibraryExtension) {
 
         sourceSets {
             getByName("main") {
-                kotlin.srcDir("build/generated/moko/androidMain/src")
+                kotlin.directories.add("build/generated/moko/androidMain/src")
             }
         }
 
