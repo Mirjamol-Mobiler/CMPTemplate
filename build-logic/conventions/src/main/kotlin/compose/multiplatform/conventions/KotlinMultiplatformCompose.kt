@@ -9,8 +9,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal fun Project.configureCompose(extension: KotlinMultiplatformExtension) {
     val extensionCompose = extensions.getByType<ComposeExtension>()
-    val composeDependencies = extensionCompose.dependencies
-
     with(extension) {
         sourceSets {
             commonMain.dependencies {
