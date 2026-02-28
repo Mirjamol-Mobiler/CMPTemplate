@@ -5,7 +5,6 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradle.plugin)
-    compileOnly(libs.detekt.gradle.plugin)
     compileOnly(libs.kotlin.compose.compiler)
 }
 
@@ -14,11 +13,6 @@ gradlePlugin {
         register("compose") {
             id = "project.compose"
             implementationClass = "ComposeConventionPlugin"
-        }
-
-        register("detekt") {
-            id = "project.detekt"
-            implementationClass = "DetektConventionPlugin"
         }
 
         register("kmpTargets") {
