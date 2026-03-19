@@ -7,7 +7,7 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xskip-prerelease-check")
     }
-    androidLibrary {
+    android {
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
         namespace = "compose.multiplatform.template.composeApp"
