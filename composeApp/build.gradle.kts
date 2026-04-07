@@ -43,6 +43,13 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
+        }
+
+        androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.androidx.compose.bom))
+            implementation(libs.androidx.compose.ui.tooling.preview)
+            implementation(libs.androidx.compose.ui.tooling)
         }
     }
 }
