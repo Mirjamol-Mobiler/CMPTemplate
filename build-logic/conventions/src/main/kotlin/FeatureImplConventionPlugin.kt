@@ -20,8 +20,9 @@ class FeatureImplConventionPlugin : Plugin<Project> {
                     commonMain.dependencies {
                         implementation(project.dependencies.platform(findLibrary("koin.bom")))
                         implementation(findLibrary("koin.core"))
+                        implementation(findLibrary("koin.compose.viewmodel"))
+                        implementation(findLibrary("androidx.lifecycle.viewmodel"))
                         implementation(findLibrary("kotlin.collections.immutable"))
-                        implementation(project(":sharedCommon:navigation"))
                         implementation(project(":sharedCommon:resources"))
                     }
                     androidMain.dependencies {

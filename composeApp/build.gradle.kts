@@ -15,7 +15,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -29,14 +28,17 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.voyager.transitions)
+
+            //Navigation 3 (the app owns the NavDisplay and its decorators)
+            implementation(libs.navigation3.runtime)
+            implementation(libs.navigation3.ui)
+            implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
             //Feature modules
             implementation(projects.sharedFeature.splash.api)
             implementation(projects.sharedFeature.splash.impl)
 
             //Shared modules
-            implementation(projects.sharedCommon.navigation)
             implementation(projects.sharedCommon.resources)
 
             //Koin

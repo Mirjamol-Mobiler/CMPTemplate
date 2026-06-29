@@ -35,7 +35,6 @@ internal fun Project.configureKMPTargets(extensions: KotlinMultiplatformExtensio
             experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
         }
         listOf(
-            iosX64(),
             iosArm64(),
             iosSimulatorArm64()
         ).forEach {

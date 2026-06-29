@@ -1,27 +1,31 @@
 [versions]
-agp = "9.1.0"
-android-compileSdk = "36"
+agp = "9.1.1"
+android-compileSdk = "37"
 android-minSdk = "26"
-android-targetSdk = "36"
+android-targetSdk = "37"
 androidx-activityCompose = "1.13.0"
 androidx-appcompat = "1.7.1"
 androidx-constraintlayout = "2.2.1"
-androidx-core-ktx = "1.18.0"
-androidx-lifecycle = "2.9.6"
-androidx-material = "1.13.0"
-compose-multiplatform = "1.10.2"
+androidx-core-ktx = "1.19.0"
+androidx-lifecycle = "2.10.0"
+androidx-material = "1.14.0"
+compose-multiplatform = "1.11.1"
 kotlin = "2.3.20"
-compose-plugin = "1.10.2"
-koin = "4.1.1"
+compose-plugin = "1.11.1"
+koin = "4.2.2"
 ksp = "2.3.4"
-ktor = "3.4.1"
+ktor = "3.5.1"
 settings = "1.3.0"
 packageName = "compose.multiplatform.template"
-voyager = "1.1.0-beta03"
-composeBom = "2026.03.00"
-kotlin-immutable-collections = "0.4.0"
-jetbrains-compose = "1.10.2"
+composeBom = "2026.06.00"
+kotlin-immutable-collections = "0.5.0"
+jetbrains-compose = "1.11.1"
 jetbrains-compose-material3 = "1.9.0"
+# Pinned to the latest JetBrains `navigation3-ui` release; do NOT auto-bump past it.
+# Google's `navigation3-runtime` ships newer patches (e.g. 1.1.3) but the multiplatform
+# UI artifact only goes up to 1.1.1, so a higher value fails to resolve.
+navigation3 = "1.1.1"
+kotlinx-serialization = "1.11.0"
 
 [libraries]
 components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
@@ -32,8 +36,9 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-navigation3 = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
 
-#Jetbrains Compose
+#JetBrains Compose
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "jetbrains-compose" }
 jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "jetbrains-compose" }
 jetbrains-compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "jetbrains-compose" }
@@ -41,14 +46,24 @@ jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "
 jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "jetbrains-compose" }
 jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "jetbrains-compose-material3" }
 
+#Compose Multiplatform Navigation 3 (official)
+# UI (NavDisplay) is JetBrains' multiplatform artifact; the runtime (NavKey, back
+# stack, entry DSL) is the AndroidX KMP artifact pulled from Google Maven.
+navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
+navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
+
 #kotlin immutable collections
 kotlin-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = 'kotlin-immutable-collections' }
+
+#kotlinx serialization (type-safe navigation routes)
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 
 #Dependencies that include in build logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-gradle-plugin = { module = "org.jetbrains.compose:org.jetbrains.compose.gradle.plugin", name = "kotlin-gradle-plugin", version.ref = "compose-plugin" }
 kotlin-compose-compiler = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 
 #Androidx compose
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -71,21 +86,13 @@ io-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotl
 io-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 io-ktor-client-logging-jvm = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
 
-#Voyager navigation librarry
-voyager-core = { module = "cafe.adriel.voyager:voyager-core", version.ref = "voyager" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
-voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
-voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
-voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
-
 #Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 
 ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }

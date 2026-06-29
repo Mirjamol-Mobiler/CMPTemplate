@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidKmpLibrary) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     id(libs.plugins.ksp.get().pluginId) version libs.versions.ksp
 }
 

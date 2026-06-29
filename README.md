@@ -1,28 +1,38 @@
 # CMPTemplate
 
-Compose Multiplatform template targeting Android and iOS, built around a modular, feature-based setup with shared navigation, resources, and conventions.
+Compose Multiplatform template targeting Android and iOS, built around a modular, feature-based setup with shared resources and Gradle conventions.
 
 ## What you get
 - Android + iOS targets with a shared Compose UI entry point.
 - Feature modules split into `api` and `impl`.
-- Shared `navigation` and `resources` modules.
+- Official Navigation 3 with type-safe `NavKey` routes.
+- Shared `resources` module.
 - Gradle convention plugins under `build-logic`.
+- Edge-to-edge Android UI with a transparent status bar.
 - Detekt configured for all subprojects.
 
 ## Tech stack
 - Kotlin Multiplatform + Compose Multiplatform
-- Voyager for navigation
+- Navigation 3 (official Compose Multiplatform navigation)
 - Koin for DI
 - Ktor ready for networking
 - KSP for code generation
 
 ## Project structure
-- `composeApp` — Android app and iOS framework entry points.
-- `sharedCommon/navigation` — shared navigation contracts and Voyager setup.
+- `androidApp` — Android application module (sets up edge-to-edge / transparent status bar).
+- `composeApp` — shared Compose UI library and iOS framework entry points.
 - `sharedCommon/resources` — Compose resources and shared assets.
 - `sharedFeature/*` — feature modules with `api` and `impl` split.
 - `build-logic` — Gradle convention plugins used by modules.
 - `iosApp` — Xcode project and iOS entry point.
+
+## Navigation
+Uses official Compose Multiplatform **Navigation 3**:
+- Each destination is a `@Serializable` `NavKey`, declared in the feature's `api` module (e.g. `SplashRoute`).
+- Each feature's `impl` module contributes its screen through an `EntryProviderScope<NavKey>` extension (e.g. `splashEntry()`).
+- `composeApp` owns the back stack and the `NavDisplay` in `App.kt`.
+
+There is no shared navigation module: feature-local routes live in each feature's `api`. Add a dedicated module for shared `NavKey`s only once multiple features need to navigate to each other.
 
 ## Getting started
 Prereqs:
@@ -31,7 +41,7 @@ Prereqs:
 
 Run Android:
 ```sh
-./gradlew :composeApp:installDebug
+./gradlew :androidApp:installDebug
 ```
 
 Run iOS:
@@ -67,3 +77,4 @@ Both tasks will:
 ## Where to start
 - App entry: `composeApp/src/commonMain/kotlin/compose/multiplatform/template/App.kt`
 - Example feature: `sharedFeature/splash/impl`
+</content>

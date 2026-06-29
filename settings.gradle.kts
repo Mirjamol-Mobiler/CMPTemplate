@@ -34,7 +34,6 @@ include(":androidApp")
 
 include(":composeApp")
 include(":sharedCommon")
-include(":sharedCommon:navigation")
 include(":sharedCommon:resources")
 
 include(":sharedFeature")
