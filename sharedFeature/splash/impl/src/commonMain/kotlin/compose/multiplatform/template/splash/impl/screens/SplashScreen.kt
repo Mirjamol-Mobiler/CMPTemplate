@@ -19,7 +19,7 @@ import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import compose.multiplatform.template.Res
 import compose.multiplatform.template.compose_multiplatform
-import compose.multiplatform.template.splash.api.SplashRoute
+import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -27,6 +27,10 @@ import org.koin.compose.viewmodel.koinViewModel
  * Registers the splash destination on a Navigation 3 [EntryProviderScope].
  * Call this from the app's `entryProvider { }` block to add the splash screen.
  */
+
+@Serializable
+data object SplashRoute : NavKey
+
 fun EntryProviderScope<NavKey>.splashEntry() {
     entry<SplashRoute> {
         SplashScreen()
